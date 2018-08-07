@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: azure-functions
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: azure-functions
+  name: azure-functions-controller-deployment
+  labels:
+    app: azure-functions-controller
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: azure-functions-controller
+  template:
+    metadata:
+      labels:
+        app: azure-functions-controller
+    spec:
+      containers:
+      - name: azure-functions-controller
+        image: yaron2/azfunccontroller
+        env:
+        - name: INGRESS
+          value: "nginx"

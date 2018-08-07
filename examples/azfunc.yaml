@@ -1,0 +1,11 @@
+apiVersion: dev.azure.com/v1
+kind: AzureFunction
+metadata:
+  name: test-func
+spec:
+  accessPolicy: public
+  min: 1
+  max: 100
+  image: microsoft/azure-functions-runtime:2.0.0-jessie
+  ingressRoute: "/test"
+  
