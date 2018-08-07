@@ -8,6 +8,8 @@ Azure Functions for Kubernetes allows developers to deploy, scale and manage Azu
 
 With Azure Functions for Kubernetes developers get the same PaaS like experience in regards to load balancing, auto scaling and deployment.
 
+[![asciicast](https://asciinema.org/a/195460.png)](https://asciinema.org/a/195460)
+
 ----
 
 ## About
