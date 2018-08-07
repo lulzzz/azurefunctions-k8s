@@ -4,15 +4,17 @@
 
 ----
 
-Azure Functions for Kubernetes allows developers to manage, scale and deploy Azure Functions on top of Kubernetes by treating functions as native Kubernetes components.
+Azure Functions for Kubernetes allows developers to deploy, scale and manage Azure Functions on Kubernetes by treating functions as native Kubernetes components.
 
-With Azure Functions for Kubernetes you get the same PaaS like experience in regards to load balancing, auto scaling and deployment.
+With Azure Functions for Kubernetes developers get the same PaaS like experience in regards to load balancing, auto scaling and deployment.
 
 ----
 
 ## About
 
 Azure Functions for Kubernetes uses a CustomResourceDefinition to describe Azure Functions and a custom controller that watches for new resources and acts accordingly to reconcile the desired state and the needed Kubernetes primitive resources required.
+
+<img src="img/diagram.png">
 
 ## Features
 
@@ -27,7 +29,6 @@ Azure Functions for Kubernetes uses a CustomResourceDefinition to describe Azure
 ## Prerequisites
 
 * Standard Kubernetes Cluster (1.8+)
-* [Azure Functions CLI](https://docs.microsoft.com/en-us/azure/azure-functions/functions-run-local#install-the-azure-functions-core-tools)
 
 ## Networking
 
@@ -64,6 +65,8 @@ $ kubectl get pod azurefunctions-controller -n azure-functions
 All done!
 
 ### Run an Azure Function
+
+First, make sure the [Azure Functions CLI](https://docs.microsoft.com/en-us/azure/azure-functions/functions-run-local#install-the-azure-functions-core-tools) is installed.
 
 Example AzureFunction object template:
 
@@ -148,7 +151,7 @@ $ kubectl get azurefunction <function-name> -o jsonpath='{.spec.URL}'
 
 #### Controller Startup options
 
-The Azure Functions controller can be setup to install Ingress components and different Service Mesh implementations via Environment Variables.
+The Azure Functions controller can be configured to install Ingress components and different Service Mesh implementations via Environment Variables.
 
 Currently supported Ingress Controllers:
 
@@ -161,9 +164,6 @@ Currently supported Meshes:
 In order to disable Ingress, simply remove the INGRESS Environment Variable from the Deployment section at deploy/azurefunctions-controller.yaml.
 To have the controller automatically setup Istio with automatic side car injection, set a MESH Environment Variable with the value of "ISTIO".
 
-## Architecture
-
-<img src="img/diagram.png">
 
 ## Development
 
