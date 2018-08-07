@@ -5,7 +5,7 @@ import (
 	"strconv"
 
 	"github.com/yaron2/azfuncs/components"
-	"github.com/yaron2/azfuncs/components/utils"
+	"github.com/yaron2/azfuncs/utils"
 	"k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )

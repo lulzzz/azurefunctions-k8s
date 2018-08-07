@@ -27,3 +27,4 @@ spec:
         env:
         - name: INGRESS
           value: "nginx"
+        imagePullPolicy: Always

@@ -3,7 +3,7 @@ package istio
 import (
 	"github.com/mholt/archiver"
 	"github.com/yaron2/azfuncs/components"
-	"github.com/yaron2/azfuncs/components/utils"
+	"github.com/yaron2/azfuncs/utils"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 

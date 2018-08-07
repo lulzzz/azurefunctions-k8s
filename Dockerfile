@@ -10,7 +10,7 @@ RUN apk add --update ca-certificates \
  && apk del --purge deps \
  && rm /var/cache/apk/*
 
-COPY dist/azcontroller /go/src/app
+COPY dist/azcontroller /go/src/app/azcontroller
 WORKDIR /go/src/app
 RUN chmod +x ./azcontroller
 

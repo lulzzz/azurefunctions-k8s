@@ -10,30 +10,18 @@ import (
 	meta_v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/tools/cache"
-	"k8s.io/client-go/tools/clientcmd"
 	"k8s.io/client-go/util/workqueue"
 
 	funcv1 "github.com/yaron2/azfuncs/pkg/apis/azurefunctions/v1"
 	azurefunctions "github.com/yaron2/azfuncs/pkg/client/clientset/versioned"
 	azurefunctioninformer_v1 "github.com/yaron2/azfuncs/pkg/client/informers/externalversions/azurefunctions/v1"
+	"github.com/yaron2/azfuncs/utils"
 )
 
 // retrieve the Kubernetes cluster client from outside of the cluster
-func getKubernetesClient() (kubernetes.Interface, azurefunctions.Interface) {
-	// construct the path to resolve to `~/.kube/config`
-	kubeConfigPath := os.Getenv("HOME") + "/.kube/config"
-
-	// create the config from the path
-	config, err := clientcmd.BuildConfigFromFlags("", kubeConfigPath)
-	if err != nil {
-		log.Fatalf("getClusterConfig: %v", err)
-	}
-
-	// generate the client based off of the config
-	client, err := kubernetes.NewForConfig(config)
-	if err != nil {
-		log.Fatalf("getClusterConfig: %v", err)
-	}
+func getClients() (kubernetes.Interface, azurefunctions.Interface) {
+	client := utils.GetKubeClient()
+	config := utils.GetConfig()
 
 	azureFuncsClient, err := azurefunctions.NewForConfig(config)
 	if err != nil {
@@ -47,7 +35,7 @@ func getKubernetesClient() (kubernetes.Interface, azurefunctions.Interface) {
 // main code path
 func main() {
 	// get the Kubernetes client for connectivity
-	client, azureFuncsClient := getKubernetesClient()
+	client, azureFuncsClient := getClients()
 
 	// retrieve our custom resource informer which was generated from
 	// the code generator and pass it the custom resource client, specifying
